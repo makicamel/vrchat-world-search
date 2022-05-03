@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { WorldsModule } from './worlds/worlds.module';
+import { WorldsSearchModule } from './worlds/worldsSearch.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), WorldsModule],
+  imports: [ConfigModule.forRoot(), WorldsSearchModule],
   controllers: [AppController],
   providers: [AppService],
 })

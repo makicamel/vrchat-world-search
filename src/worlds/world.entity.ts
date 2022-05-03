@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryColumn } from 'typeorm';
-import { WorldInterface } from './world.interface';
+import { WorldInterface } from './types/world.interface';
 
 @Entity()
 export class World implements WorldInterface {

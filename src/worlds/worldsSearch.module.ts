@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ElasticsearchModule } from '@nestjs/elasticsearch';
-import { WorldsController } from './worlds.controller';
-import { WorldsService } from './worlds.service';
+import { WorldsSearchController } from './worldsSearch.controller';
+import { WorldsSearchService } from './worldsSearch.service';
 
 @Module({
   imports: [
+    ConfigModule,
     ElasticsearchModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -18,7 +19,7 @@ import { WorldsService } from './worlds.service';
       inject: [ConfigService],
     }),
   ],
-  controllers: [WorldsController],
-  providers: [WorldsService],
+  controllers: [WorldsSearchController],
+  providers: [WorldsSearchService],
 })
-export class WorldsModule { }
+export class WorldsSearchModule { }
