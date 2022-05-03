@@ -7,12 +7,17 @@ export class WorldsSearchService {
   index: 'worlds';
   constructor(private readonly elasticsearchService: ElasticsearchService) { }
 
-  async search(): Promise<Array<WorldsSearchResult>> {
+  async search(text: string): Promise<Array<WorldsSearchResult>> {
     const response = await this.elasticsearchService.search<WorldsSearchResult>(
       {
         index: this.index,
-        query: {
-          match: { authorName: 'foo' },
+        body: {
+          query: {
+            multi_match: {
+              query: text,
+              fields: ['worldName', 'authorName'],
+            },
+          },
         },
       },
     );
