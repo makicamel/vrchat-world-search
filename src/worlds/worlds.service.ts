@@ -4,7 +4,7 @@ import { World } from './world.entity';
 
 @Injectable()
 export class WorldsService {
-  index: 'worlds';
+  index = 'worlds';
   constructor(private readonly elasticsearchService: ElasticsearchService) { }
 
   async getAllWorlds(): Promise<Array<World>> {
