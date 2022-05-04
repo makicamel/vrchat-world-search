@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ElasticsearchModule } from '@nestjs/elasticsearch';
-import { WorldsSearchController } from './worldsSearch.controller';
-import { WorldsSearchService } from './worldsSearch.service';
+import { WorldsController } from './worlds.controller';
+import { WorldsService } from './worlds.service';
 
 @Module({
   imports: [
@@ -19,7 +19,7 @@ import { WorldsSearchService } from './worldsSearch.service';
       inject: [ConfigService],
     }),
   ],
-  controllers: [WorldsSearchController],
-  providers: [WorldsSearchService],
+  controllers: [WorldsController],
+  providers: [WorldsService],
 })
-export class WorldsSearchModule { }
+export class WorldsModule { }

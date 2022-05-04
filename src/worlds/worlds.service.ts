@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ElasticsearchService } from '@nestjs/elasticsearch';
 import { World } from './world.entity';
-import { WorldsSearchResult } from './types/worldsSearchResult.interface';
 
 @Injectable()
-export class WorldsSearchService {
+export class WorldsService {
   index: 'worlds';
   constructor(private readonly elasticsearchService: ElasticsearchService) { }
 

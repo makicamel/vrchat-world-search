@@ -1,6 +1,6 @@
 import { WorldInterface } from './world.interface';
 
-export interface WorldsSearchResult {
+export interface WorldsInterface {
   hits: {
     total: number;
     hits: Array<{

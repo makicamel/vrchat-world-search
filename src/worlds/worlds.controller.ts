@@ -1,10 +1,10 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { World } from './world.entity';
-import { WorldsSearchService } from './worldsSearch.service';
+import { WorldsService } from './worlds.service';
 
 @Controller('worlds')
-export class WorldsSearchController {
-  constructor(private readonly worldService: WorldsSearchService) { }
+export class WorldsController {
+  constructor(private readonly worldService: WorldsService) { }
 
   @Get()
   async getWorlds(@Query('search') search): Promise<Array<World>> {
