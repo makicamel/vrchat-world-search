@@ -11,6 +11,6 @@ export class WorldsController {
     if (search) {
       return this.worldService.search(search);
     }
-    return this.worldService.search('');
+    return this.worldService.getAllWorlds();
   }
 }
