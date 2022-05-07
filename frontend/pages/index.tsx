@@ -10,7 +10,7 @@ const fetcher = (url: string) => {
     timeout: 5000,
     headers: { 'Content-Type': 'application/json' }
   });
-  return apiClient.get(url).then((response) => response)
+  return apiClient.get(url).then((response) => response.data)
 }
 
 const Home: NextPage = () => {
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   if (error) return <div>An error has occurred.</div>;
   if (!data) return <div>Loading...</div>;
 
-  const worldItems = data.data.map((world) =>
+  const worldItems = data.map((world) =>
     <tr>
       <td>
         <img src={world.thumbnailImageUrl} alt="World Thumbnail" width="200" height="150" />
