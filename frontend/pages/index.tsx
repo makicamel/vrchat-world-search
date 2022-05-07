@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import axios from 'axios'
 import useSWR from 'swr'
 import styles from '../styles/Home.module.css'
@@ -26,7 +25,7 @@ const Home: NextPage = () => {
   const worldItems = data.data.map((world) =>
     <tr>
       <td>
-        <Image src={world.thumbnailImageUrl} alt="World Thumbnail" width="200" height="150" />
+        <img src={world.thumbnailImageUrl} alt="World Thumbnail" width="200" height="150" />
         <ul>
           <li>name: {world.worldName}</li>
           <li>author: {world.authorName}</li>
