@@ -10,10 +10,7 @@ const fetcher = (url: string) => {
     timeout: 5000,
     headers: { 'Content-Type': 'application/json' }
   });
-  return apiClient
-    .get(url)
-    .then((response) => response)
-    .catch((error) => error)
+  return apiClient.get(url).then((response) => response)
 }
 
 const Home: NextPage = () => {
