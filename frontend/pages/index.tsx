@@ -1,9 +1,28 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import axios from 'axios'
+import useSWR from 'swr'
 import styles from '../styles/Home.module.css'
 
+const fetcher = (url: string) => {
+  const apiClient = axios.create({
+    baseURL: 'http://localhost:3001',
+    timeout: 5000,
+    headers: { 'Content-Type': 'application/json' }
+  });
+  return apiClient
+    .get(url)
+    .then((response) => response)
+    .catch((error) => error)
+}
+
 const Home: NextPage = () => {
+  const { data, error } = useSWR('/worlds', fetcher)
+
+  if (error) return <div>An error has occurred.</div>;
+  if (!data) return <div>Loading...</div>;
+
   return (
     <div className={styles.container}>
       <Head>
