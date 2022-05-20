@@ -32,15 +32,17 @@ const Home: NextPage = () => {
   );
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>VRChat World Search</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@700&display=swap" rel="stylesheet" />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          VRChat World Search
-        </h1>
+      <Header />
+      <main className={`${styles.main} ${styles.container}`}>
         <table>
           <tbody>
             {worldItems}
@@ -51,5 +53,11 @@ const Home: NextPage = () => {
     </div >
   )
 }
+
+const Header: React.FC = () => (
+  <header className={styles.header}>
+    VRChat World Search
+  </header>
+)
 
 export default Home
