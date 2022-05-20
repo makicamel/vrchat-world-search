@@ -3,6 +3,7 @@ import Head from 'next/head'
 import axios from 'axios'
 import useSWR from 'swr'
 import styles from '../styles/Home.module.css'
+import WorldCard from '../components/WorldCard'
 
 const fetcher = (url: string) => {
   const apiClient = axios.create({
@@ -19,18 +20,6 @@ const Home: NextPage = () => {
   if (error) return <div>An error has occurred.</div>;
   if (!data) return <div>Loading...</div>;
 
-  const worldItems = data.map((world) =>
-    <tr>
-      <td>
-        <img src={world.thumbnailImageUrl} alt="World Thumbnail" width="200" height="150" />
-        <ul>
-          <li>name: {world.worldName}</li>
-          <li>author: {world.authorName}</li>
-        </ul>
-      </td>
-    </tr>
-  );
-
   return (
     <div>
       <Head>
@@ -43,12 +32,7 @@ const Home: NextPage = () => {
       </Head>
       <Header />
       <main className={`${styles.main} ${styles.container}`}>
-        <table>
-          <tbody>
-            {worldItems}
-          </tbody>
-        </table>
-
+        {data.map((world) => <WorldCard world={world} />)}
       </main >
     </div >
   )
