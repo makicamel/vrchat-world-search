@@ -3,8 +3,9 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { CardActionArea } from '@mui/material'
+import { WorldInterface as World } from '../../types/world.interface'
 
-const WorldCard: React.FC = (props) => (
+const WorldCard = (props: { world: World }) => (
   <Card variant="outlined" sx={{ maxWidth: 400, mx: 'auto' }}>
     <CardActionArea>
       <CardMedia

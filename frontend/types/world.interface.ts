@@ -1,0 +1,1 @@
+../../backend/src/worlds/types/world.interface.ts

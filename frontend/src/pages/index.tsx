@@ -5,6 +5,7 @@ import useSWR from 'swr'
 import Grid from '@mui/material/Grid'
 import styles from '../styles/Home.module.css'
 import WorldCard from '../components/WorldCard'
+import { WorldInterface as World } from '../../types/world.interface'
 
 const fetcher = (url: string) => {
   const apiClient = axios.create({
@@ -34,7 +35,7 @@ const Home: NextPage = () => {
       <Header />
       <main className={styles.main}>
         <Grid container spacing={{ xs: 2, sm: 4, md: 8 }} justifyContent="center">
-          {data.map((world) => (
+          {data.map((world: World) => (
             <Grid item md={6} lg={4}>
               <WorldCard world={world} />
             </Grid>
