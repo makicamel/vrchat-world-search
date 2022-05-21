@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import axios from 'axios'
 import useSWR from 'swr'
+import Grid from '@mui/material/Grid'
 import styles from '../styles/Home.module.css'
 import WorldCard from '../components/WorldCard'
 
@@ -31,9 +32,15 @@ const Home: NextPage = () => {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <Header />
-      <main className={`${styles.main} ${styles.container}`}>
-        {data.map((world) => <WorldCard world={world} />)}
-      </main >
+      <main className={styles.main}>
+        <Grid container spacing={{ xs: 2, sm: 4, md: 8 }} justifyContent="center">
+          {data.map((world) => (
+            <Grid item md={6} lg={4}>
+              <WorldCard world={world} />
+            </Grid>
+          ))}
+        </Grid>
+      </main>
     </div >
   )
 }
