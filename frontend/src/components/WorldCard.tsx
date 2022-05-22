@@ -10,7 +10,7 @@ import styles from '../styles/Home.module.css'
 
 const WorldCard = (props: { world: World }) => (
   <Card variant="outlined" sx={{ maxWidth: 400, mx: 'auto' }}>
-    <CardActionArea>
+    <CardActionArea className={styles.card}>
       <CardMedia
         component="img"
         image={props.world.thumbnailImageUrl}
