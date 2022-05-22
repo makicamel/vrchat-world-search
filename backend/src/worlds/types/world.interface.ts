@@ -5,4 +5,6 @@ export interface WorldInterface {
   authorName: string;
   imageUrl: string;
   thumbnailImageUrl: string;
+  description: string;
+  supportQuest: boolean;
 }

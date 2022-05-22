@@ -7,4 +7,6 @@ export class World implements WorldInterface {
   authorName: string;
   imageUrl: string;
   thumbnailImageUrl: string;
+  description: string;
+  supportQuest: boolean;
 }
