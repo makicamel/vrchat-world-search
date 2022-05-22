@@ -7,4 +7,5 @@ export interface WorldInterface {
   thumbnailImageUrl: string;
   description: string;
   supportQuest: boolean;
+  tags: Array<string>;
 }

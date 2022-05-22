@@ -8,6 +8,9 @@ const theme = createTheme({
       default: '#1b2025',
       paper: '#333c46',
     },
+    info: {
+      main: '#07343f',
+    },
     text: {
       primary: '#fff',
     },
