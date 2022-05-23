@@ -15,6 +15,7 @@ export class WorldsService {
           match_all: {},
         },
       },
+      sort: 'updatedAt:desc',
     });
     const hits = response.hits.hits;
     return hits.map((world) => world._source);
@@ -31,6 +32,7 @@ export class WorldsService {
           },
         },
       },
+      sort: 'updatedAt:desc',
     });
     const hits = response.hits.hits;
     return hits.map((world) => world._source);
