@@ -7,10 +7,12 @@ export class WorldsController {
   constructor(private readonly worldService: WorldsService) { }
 
   @Get()
-  async getWorlds(@Query('search') search): Promise<Array<World>> {
-    if (search) {
-      return this.worldService.search(search);
-    }
-    return this.worldService.getAllWorlds();
+  async getWorlds(
+    @Query('search') search: string,
+    @Query('authorId') authorId: string
+  ): Promise<Array<World>> {
+    const query = { search: search, authorId: authorId }
+
+    return this.worldService.search(query);
   }
 }

@@ -18,7 +18,13 @@ export class WorldsService {
   }
 
   #query(query) {
-    if (query.search) {
+    if (query.authorId) {
+      return {
+        term: {
+          authorId: query.authorId,
+        }
+      }
+    } else if (query.search) {
       return {
         multi_match: {
           query: query.search,
