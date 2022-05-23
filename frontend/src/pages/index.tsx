@@ -16,11 +16,22 @@ const fetcher = (url: string) => {
   return apiClient.get(url).then((response) => response.data)
 }
 
-const Home: NextPage = () => {
-  const { data, error } = useSWR('/worlds', fetcher)
+function useWorlds(params: { authorId?: string, text?: string }) {
+  const query = Object.entries(params).map(q => q.join('=')).join('&')
+  const { data, error } = useSWR(`/worlds?${query}`, fetcher)
 
-  if (error) return <div>An error has occurred.</div>;
-  if (!data) return <div>Loading...</div>;
+  return {
+    worlds: data,
+    isLoading: !error && !data,
+    isError: error
+  }
+}
+
+const Home: NextPage = () => {
+  const { worlds, isLoading, isError } = useWorlds({})
+
+  if (isLoading) return <div>Loading...</div>
+  if (isError) return <div>An error has occurred.</div>
 
   return (
     <div>
@@ -35,7 +46,7 @@ const Home: NextPage = () => {
       <Header />
       <main className={styles.main}>
         <Grid container spacing={{ xs: 2, sm: 4, md: 8 }} justifyContent="center">
-          {data.map((world: World) => (
+          {worlds.map((world: World) => (
             <Grid item md={6} lg={4}>
               <WorldCard world={world} />
             </Grid>
