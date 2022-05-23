@@ -17,17 +17,17 @@ export class WorldsService {
     return hits.map((world) => world._source);
   }
 
-  #query(query) {
+  #query(query: { text?: string, authorId?: string }) {
     if (query.authorId) {
       return {
         term: {
           authorId: query.authorId,
         }
       }
-    } else if (query.search) {
+    } else if (query.text) {
       return {
         multi_match: {
-          query: query.search,
+          query: query.text,
           fields: ['worldName', 'authorName'],
         },
       }
