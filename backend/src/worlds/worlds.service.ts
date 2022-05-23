@@ -7,34 +7,26 @@ export class WorldsService {
   index = 'worlds';
   constructor(private readonly elasticsearchService: ElasticsearchService) { }
 
-  async getAllWorlds(): Promise<Array<World>> {
+  async search(queries): Promise<Array<World>> {
     const response = await this.elasticsearchService.search<World>({
       index: this.index,
-      body: {
-        query: {
-          match_all: {},
-        },
-      },
+      body: { query: this.#query(queries) },
       sort: 'updatedAt:desc',
-    });
+    })
     const hits = response.hits.hits;
     return hits.map((world) => world._source);
   }
 
-  async search(text: string): Promise<Array<World>> {
-    const response = await this.elasticsearchService.search<World>({
-      index: this.index,
-      body: {
-        query: {
-          multi_match: {
-            query: text,
-            fields: ['worldName', 'authorName'],
-          },
+  #query(query) {
+    if (query.search) {
+      return {
+        multi_match: {
+          query: query.search,
+          fields: ['worldName', 'authorName'],
         },
-      },
-      sort: 'updatedAt:desc',
-    });
-    const hits = response.hits.hits;
-    return hits.map((world) => world._source);
+      }
+    } else {
+      return { match_all: {}, }
+    }
   }
 }
