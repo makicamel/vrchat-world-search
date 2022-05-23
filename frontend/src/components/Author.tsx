@@ -11,6 +11,9 @@ type Author = {
 const AuthorChip = styled.span`
   cursor: pointer;
   color: ${() => theme.palette.text.secondary};
+  &:hover {
+    color: ${() => '#6ae3f9'};
+  }
 `
 
 const Author = (props: Author) => (
