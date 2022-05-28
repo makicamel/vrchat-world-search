@@ -11,7 +11,7 @@ import { WorldInterface as World } from '../../types/world.interface'
 import styles from '../styles/Home.module.css'
 import Author from './Author'
 
-const WorldCard = (props: { world: World }) => (
+const WorldCard = (props: { world: World, setAuthorId: any }) => (
   <Card variant="outlined" sx={{ maxWidth: 400, mx: 'auto' }}>
     <CardActionArea className={styles.card}>
       <CardMedia
@@ -26,7 +26,10 @@ const WorldCard = (props: { world: World }) => (
               {props.world.worldName}
             </Typography>
           </Grid>
-          <Author authorName={props.world.authorName} authorId={props.world.authorId} />
+          <Author
+            author={{ authorName: props.world.authorName, authorId: props.world.authorId }}
+            setAuthorId={props.setAuthorId}
+          />
         </Grid>
         <Typography variant="body2">
           {props.world.description}

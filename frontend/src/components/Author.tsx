@@ -16,12 +16,17 @@ const AuthorChip = styled.span`
   }
 `
 
-const Author = (props: Author) => (
-  <Grid item>
+function Author(props: { author: Author, setAuthorId: any }) {
+  return (<Grid item>
     <Typography variant="body2" display="inline-block">
-      by <AuthorChip className="author">{props.authorName}</AuthorChip>
+      by <AuthorChip
+        className="author"
+        onClick={() => props.setAuthorId(props.author.authorId)}
+      >
+        {props.author.authorName}
+      </AuthorChip>
     </Typography>
-  </Grid>
-)
+  </Grid >)
+}
 
 export default Author
