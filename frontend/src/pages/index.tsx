@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import Grid from '@mui/material/Grid'
 import { Dispatch, SetStateAction } from 'react';
 import styles from '../styles/Home.module.css'
@@ -39,14 +38,6 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <Head>
-        <title>VRChat World Search</title>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@700&display=swap" rel="stylesheet" />
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
       <Header setAuthorId={setAuthorId} />
       <main className={styles.main}>
         <Grid container spacing={{ xs: 2, sm: 4, md: 8 }} justifyContent="center">
