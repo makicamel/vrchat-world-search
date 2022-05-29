@@ -10,15 +10,23 @@ const Worlds: React.FC = () => {
   const { data, error, setAuthorId } = useWorldsWithAuthorId()
   if (!data) return <div>Loading...</div>
   if (error) return <div>An error has occurred.</div>
+    return data.map((world: World) => {
+      const author = (<AuthorLink
+        author={{ authorName: world.authorName, authorId: world.authorId }}
+        setAuthorId={setAuthorId}
+      />)
 
-  return data.map((world: World) => (
-    <Grid item md={6} lg={4}>
-      <WorldCard world={world} setAuthorId={setAuthorId} />
-    </Grid>
-  ))
-}
+      return (
+        <Grid item md={6} lg={4} >
+          <WorldCard world={world} author={author} />
+        </Grid>
+      )
+    })
+  }
 
 const Home: NextPage = () => {
+  const { data, error, setAuthorId } = useWorldsWithAuthorId()
+
   return (
     <div>
       <Head>

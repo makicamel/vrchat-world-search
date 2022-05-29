@@ -10,7 +10,7 @@ import { CardActionArea } from '@mui/material'
 import { WorldInterface as World } from '../../types/world.interface'
 import styles from '../styles/Home.module.css'
 
-const WorldCard = (props: { world: World, setAuthorId: any }) => (
+const WorldCard = (props: { world: World, author: JSX.Element }) => (
   <Card variant="outlined" sx={{ maxWidth: 400, mx: 'auto' }}>
     <CardActionArea className={styles.card}>
       <CardMedia
@@ -26,10 +26,7 @@ const WorldCard = (props: { world: World, setAuthorId: any }) => (
             </Typography>
           </Grid>
           <Grid item>
-            <Author
-              author={{ authorName: props.world.authorName, authorId: props.world.authorId }}
-              setAuthorId={props.setAuthorId}
-            />
+            {props.author}
           </Grid>
         </Grid>
         <Typography variant="body2">
