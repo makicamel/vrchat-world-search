@@ -1,23 +1,29 @@
 import { useState } from 'react'
 import axios, { AxiosError } from 'axios'
-import useSWR from 'swr'
+import useSWRInfinite from 'swr/infinite'
 import { WorldInterface as World } from '../../types/world.interface'
 
-const fetcher = (url: string, params: { authorId?: string, text?: string }) => {
+const fetcher = (url: string, pageIndex: number, authorId: string) => {
   const apiClient = axios.create({
     baseURL: 'http://localhost:3001',
     timeout: 5000,
     headers: { 'Content-Type': 'application/json' }
   });
-  return apiClient.get(url, { params: params }).then((response) => response.data)
+  const query = (authorId) ? `&authorId=${authorId}` : ''
+  return apiClient.get(`${url}?page=${pageIndex}${query}`).then((response) => response.data)
 }
 
 const useWorldsWithAuthorId = (initialAuthorId?: string) => {
   const [authorId, setAuthorId] = useState(initialAuthorId);
-  const query = (authorId) ? `authorId=${authorId}` : ''
+  const { data, error } = useSWRInfinite(getKey, fetcher)
+  const worlds: World[] | undefined = data ? data.flat() : undefined
 
-  const { data, error } = useSWR<World[], AxiosError>(`/worlds?${query}`, fetcher)
-  return { data, error, authorId, setAuthorId }
+  return { worlds, error, authorId, setAuthorId }
+}
+
+const getKey = (pageIndex: number, previousPageData: any[]) => {
+  if (previousPageData && !previousPageData.length) return null
+  return ['/worlds', pageIndex]
 }
 
 export default useWorldsWithAuthorId;

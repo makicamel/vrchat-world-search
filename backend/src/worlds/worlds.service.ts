@@ -7,11 +7,14 @@ export class WorldsService {
   index = 'worlds';
   constructor(private readonly elasticsearchService: ElasticsearchService) { }
 
-  async search(queries): Promise<Array<World>> {
+  async search(queries: {
+    page: number,
+  }): Promise<Array<World>> {
     const response = await this.elasticsearchService.search<World>({
       index: this.index,
       body: { query: this.#query(queries) },
       sort: 'updatedAt:desc',
+      from: queries.page * 10,
     })
     const hits = response.hits.hits;
     return hits.map((world) => world._source);

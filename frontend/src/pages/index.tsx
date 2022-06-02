@@ -9,16 +9,16 @@ import useWorldsWithAuthorId from '../hooks/useWorlds'
 import { WorldInterface as World } from '../../types/world.interface'
 
 const Worlds: React.FC<{
-  data: World[] | undefined,
+  worlds: World[] | undefined,
   error: any,
-  setAuthorId: Dispatch<SetStateAction<string | undefined>>
+  setAuthorId: Dispatch<SetStateAction<string | undefined>>,
 }>
-  = ({ data, error, setAuthorId }): JSX.Element => {
-    if (!data) return <div>Loading...</div>
+  = ({ worlds, error, setAuthorId }): JSX.Element => {
+    if (!worlds) return <div>Loading...</div>
     if (error) return <div>An error has occurred.</div>
 
     return (<>
-      {data.map((world: World) => {
+      {worlds.map((world: World) => {
         const author = (<AuthorLink
           author={{ authorName: world.authorName, authorId: world.authorId }}
           setAuthorId={setAuthorId}
@@ -34,14 +34,14 @@ const Worlds: React.FC<{
   }
 
 const Home: NextPage = () => {
-  const { data, error, setAuthorId } = useWorldsWithAuthorId()
+  const { worlds, error, setAuthorId } = useWorldsWithAuthorId()
 
   return (
     <div>
       <Header setAuthorId={setAuthorId} />
       <main className={styles.main}>
         <Grid container spacing={{ xs: 2, sm: 4, md: 8 }} justifyContent="center">
-          <Worlds data={data} error={error} setAuthorId={setAuthorId} />
+          <Worlds worlds={worlds} error={error} setAuthorId={setAuthorId} />
         </Grid>
       </main>
     </div >
