@@ -34,7 +34,7 @@ const Worlds: React.FC<{
   }
 
 const Home: NextPage = () => {
-  const { worlds, error, setAuthorId } = useWorldsWithAuthorId()
+  const { worlds, error, setAuthorId, loadMoreWorlds } = useWorldsWithAuthorId()
 
   return (
     <div>
@@ -43,6 +43,7 @@ const Home: NextPage = () => {
         <Grid container spacing={{ xs: 2, sm: 4, md: 8 }} justifyContent="center">
           <Worlds worlds={worlds} error={error} setAuthorId={setAuthorId} />
         </Grid>
+        <button onClick={loadMoreWorlds} />
       </main>
     </div >
   )

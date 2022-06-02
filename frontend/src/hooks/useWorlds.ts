@@ -15,10 +15,12 @@ const fetcher = (url: string, pageIndex: number, authorId: string) => {
 
 const useWorldsWithAuthorId = (initialAuthorId?: string) => {
   const [authorId, setAuthorId] = useState(initialAuthorId);
-  const { data, error } = useSWRInfinite(getKey, fetcher)
+  const { data, error, size, setSize } = useSWRInfinite(getKey, fetcher)
   const worlds: World[] | undefined = data ? data.flat() : undefined
 
-  return { worlds, error, authorId, setAuthorId }
+  const loadMoreWorlds = () => { setSize(size + 1) }
+
+  return { worlds, error, authorId, setAuthorId, loadMoreWorlds }
 }
 
 const getKey = (pageIndex: number, previousPageData: any[]) => {
