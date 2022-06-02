@@ -18,7 +18,11 @@ const useWorldsWithAuthorId = (initialAuthorId?: string) => {
   const { data, error, size, setSize } = useSWRInfinite(getKey, fetcher)
   const worlds: World[] | undefined = data ? data.flat() : undefined
 
-  const loadMoreWorlds = () => { setSize(size + 1) }
+  const loadMoreWorlds = () => {
+    setTimeout(() => {
+      setSize(size + 1)
+    }, 250)
+  }
 
   return { worlds, error, authorId, setAuthorId, loadMoreWorlds }
 }
