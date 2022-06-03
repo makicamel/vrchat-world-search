@@ -3,7 +3,7 @@ import axios, { AxiosError } from 'axios'
 import useSWRInfinite from 'swr/infinite'
 import { WorldInterface as World } from '../../types/world.interface'
 
-const fetcher = (url: string, pageIndex: number, authorId: string) => {
+const fetcher = (url: string, pageIndex: number, authorId?: string) => {
   const apiClient = axios.create({
     baseURL: 'http://localhost:3001',
     timeout: 5000,
@@ -15,7 +15,10 @@ const fetcher = (url: string, pageIndex: number, authorId: string) => {
 
 const useWorldsWithAuthorId = (initialAuthorId?: string) => {
   const [authorId, setAuthorId] = useState(initialAuthorId);
-  const { data, error, size, setSize } = useSWRInfinite(getKey, fetcher)
+  const { data, error, size, setSize } = useSWRInfinite(
+    getKey,
+    (url: string, index: number) => fetcher(url, index, authorId)
+  )
   const worlds: World[] | undefined = data ? data.flat() : undefined
 
   const loadMoreWorlds = () => {

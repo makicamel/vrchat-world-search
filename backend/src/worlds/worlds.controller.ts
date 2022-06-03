@@ -8,12 +8,9 @@ export class WorldsController {
 
   @Get()
   async getWorlds(
-    @Query('text') text: string,
-    @Query('authorId') authorId: string
+    @Query('authorId') authorId: string,
     @Query('page') page: number,
   ): Promise<Array<World>> {
-    const query = { text: text, authorId: authorId }
-
-    return this.worldService.search({ page: page });
+    return this.worldService.search({ authorId, page });
   }
 }

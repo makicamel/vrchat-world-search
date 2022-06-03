@@ -8,6 +8,7 @@ export class WorldsService {
   constructor(private readonly elasticsearchService: ElasticsearchService) { }
 
   async search(queries: {
+    authorId?: string,
     page: number,
   }): Promise<Array<World>> {
     const response = await this.elasticsearchService.search<World>({
