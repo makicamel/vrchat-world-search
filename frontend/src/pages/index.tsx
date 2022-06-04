@@ -14,8 +14,9 @@ const Worlds: React.FC<{
   error: any,
   setAuthorId: Dispatch<SetStateAction<string | undefined>>,
   loadMoreWorlds: any,
+  isReachingEnd: boolean,
 }>
-  = ({ worlds, error, setAuthorId, loadMoreWorlds }): JSX.Element => {
+  = ({ worlds, error, setAuthorId, loadMoreWorlds, isReachingEnd }): JSX.Element => {
     const loader = (<div key='loader'>Loading...</div>)
     if (!worlds) return loader
     if (error) return <div>An error has occurred.</div>
@@ -39,7 +40,7 @@ const Worlds: React.FC<{
       <InfiniteScroll
         pageStart={0}
         loadMore={loadMoreWorlds}
-        hasMore={true}
+        hasMore={!isReachingEnd}
         loader={loader}
       >
         <Grid container spacing={{ xs: 2, sm: 4, md: 8 }} justifyContent="center">
@@ -50,13 +51,13 @@ const Worlds: React.FC<{
   }
 
 const Home: NextPage = () => {
-  const { worlds, error, setAuthorId, loadMoreWorlds } = useWorldsWithAuthorId()
+  const { worlds, error, setAuthorId, loadMoreWorlds, isReachingEnd } = useWorldsWithAuthorId()
 
   return (
     <div>
       <Header setAuthorId={setAuthorId} />
       <main className={styles.main}>
-        <Worlds worlds={worlds} error={error} setAuthorId={setAuthorId} loadMoreWorlds={loadMoreWorlds} />
+        <Worlds worlds={worlds} error={error} setAuthorId={setAuthorId} loadMoreWorlds={loadMoreWorlds} isReachingEnd={isReachingEnd} />
       </main>
     </div >
   )

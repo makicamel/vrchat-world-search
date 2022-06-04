@@ -25,13 +25,13 @@ const useWorldsWithAuthorId = () => {
   const worlds: World[] | undefined = data ? data.flat() : undefined
   const isLoadingMore = (size > 0 && data && typeof data[size - 1] === 'undefined')
   const isEmpty = data?.[0]?.length === 0
-  const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE)
+  const isReachingEnd = isEmpty || !!(data && data[data.length - 1]?.length < PAGE_SIZE)
 
   const loadMoreWorlds = () => {
     if (!isLoadingMore && !isReachingEnd) setSize(size + 1)
   }
 
-  return { worlds, error, authorId, setAuthorId, loadMoreWorlds }
+  return { worlds, error, authorId, setAuthorId, loadMoreWorlds, isReachingEnd }
 }
 
 export default useWorldsWithAuthorId;
