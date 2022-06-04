@@ -36,8 +36,8 @@ const WorldCard = (props: { world: World, author: JSX.Element }) => (
           {props.world.supportQuest ? 'Quest Supported' : ''}
         </Typography>
         <div>
-          {props.world.tags.map((tag: string) => (
-            <Chip label={tag} size="small" clickable={true} color="info" className={styles.chip} />
+          {props.world.tags.map((tag: string, index: number) => (
+            <Chip key={`${index}${props.world.id}`} label={tag} size="small" clickable={true} color="info" className={styles.chip} />
           ))}
         </div>
         <Button

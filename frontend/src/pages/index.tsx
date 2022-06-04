@@ -16,19 +16,19 @@ const Worlds: React.FC<{
   loadMoreWorlds: any,
 }>
   = ({ worlds, error, setAuthorId, loadMoreWorlds }): JSX.Element => {
-    const loader = (<div>Loading...</div>)
+    const loader = (<div key='loader'>Loading...</div>)
     if (!worlds) return loader
     if (error) return <div>An error has occurred.</div>
 
     const items = (
-      (worlds || []).map((world: World) => {
+      (worlds || []).map((world: World, index: number) => {
         const author = (<AuthorLink
           author={{ authorName: world.authorName, authorId: world.authorId }}
           setAuthorId={setAuthorId}
         />)
 
         return (
-          <Grid item md={6} lg={4} >
+          <Grid item key={`${index}${world.id}`} md={6} lg={4} >
             <WorldCard world={world} author={author} />
           </Grid>
         )
