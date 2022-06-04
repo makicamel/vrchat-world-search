@@ -12,8 +12,8 @@ const fetcher = (url: string) => {
   return apiClient.get(url).then((response) => response.data)
 }
 
-const useWorldsWithAuthorId = (initialAuthorId?: string) => {
-  const [authorId, setAuthorId] = useState(initialAuthorId);
+const useWorldsWithAuthorId = () => {
+  const [authorId, setAuthorId] = useState<string | undefined>(undefined);
   const query = (authorId) ? `&authorId=${authorId}` : ''
 
   const { data, error, isValidating, size, setSize } = useSWRInfinite(
