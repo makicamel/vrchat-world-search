@@ -15,8 +15,14 @@ const fetcher = (url: string) => {
 }
 
 const useWorldsWithAuthorId = () => {
+  const [supportQuest, setSupportQuest] = useState(false)
   const [authorId, setAuthorId] = useState<string | undefined>(undefined);
-  const query = (authorId) ? `&authorId=${authorId}` : ''
+  const query = [
+    (authorId) ? `&authorId=${authorId}` : null,
+    (supportQuest) ? `&supportQuest=${supportQuest}` : null
+  ]
+    .filter(q => q)
+    .join()
 
   const { data, error, size, setSize } = useSWRInfinite(
     (index: number) => `/worlds?page=${index}${query}`,
@@ -31,7 +37,7 @@ const useWorldsWithAuthorId = () => {
     if (!isLoadingMore && !isReachingEnd) setSize(size + 1)
   }
 
-  return { worlds, error, setAuthorId, loadMoreWorlds, isReachingEnd }
+  return { worlds, error, setAuthorId, setSupportQuest, loadMoreWorlds, isReachingEnd }
 }
 
 export default useWorldsWithAuthorId;

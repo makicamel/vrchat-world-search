@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
@@ -8,9 +9,26 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { CardActionArea } from '@mui/material'
 import { WorldInterface as World } from '../../types/world.interface'
+import styled from 'styled-components'
 import styles from '../styles/Home.module.css'
 
-const WorldCard = (props: { world: World, author: JSX.Element }) => (
+const SupportQuestChipStyle = styled.span`
+  cursor: pointer;
+  color: ${() => '#00de56'};
+  &:hover {
+    color: ${() => '#5dffb7'};
+  }
+`
+
+const SupportQuestChip = (props: { setSupportQuest: Dispatch<SetStateAction<boolean>> }) => (
+  <SupportQuestChipStyle
+    onClick={() => props.setSupportQuest(true)}
+  >
+    Quest Supported
+  </SupportQuestChipStyle>
+)
+
+const WorldCard = (props: { world: World, author: JSX.Element, setSupportQuest: Dispatch<SetStateAction<boolean>> }) => (
   <Card variant="outlined" sx={{ maxWidth: 400, mx: 'auto' }}>
     <CardActionArea className={styles.card}>
       <CardMedia
@@ -32,9 +50,11 @@ const WorldCard = (props: { world: World, author: JSX.Element }) => (
         <Typography variant="body2">
           {props.world.description}
         </Typography>
-        <Typography variant="body2" color="#00de56">
-          {props.world.supportQuest ? 'Quest Supported' : ''}
-        </Typography>
+        {props.world.supportQuest ?
+          (<Typography variant="body2">
+            <SupportQuestChip setSupportQuest={props.setSupportQuest} />
+          </Typography>)
+          : ''}
         <div>
           {props.world.tags.map((tag: string, index: number) => (
             <Chip key={`${index}${props.world.id}`} label={tag} size="small" clickable={true} color="info" className={styles.chip} />
