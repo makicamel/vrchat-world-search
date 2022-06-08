@@ -7,31 +7,37 @@ export class WorldsService {
   index = 'worlds';
   constructor(private readonly elasticsearchService: ElasticsearchService) { }
 
-  async search(queries: {
-    authorId?: string,
+  async search({ page, authorId }: {
     page: number,
+    authorId?: string,
   }): Promise<Array<World>> {
     const response = await this.elasticsearchService.search<World>({
       index: this.index,
-      body: { query: this.#query(queries) },
+      body: {
+        query: this.#query({
+          authorId,
+        })
+      },
       sort: 'updatedAt:desc',
-      from: queries.page * 10,
+      from: page * 10,
     })
     const hits = response.hits.hits;
     return hits.map((world) => world._source);
   }
 
-  #query(query: { text?: string, authorId?: string }) {
-    if (query.authorId) {
+  #query({ text, authorId }: {
+    text?: string, authorId?: string,
+  }) {
+    if (authorId) {
       return {
         term: {
-          authorId: query.authorId,
+          authorId: authorId,
         }
       }
-    } else if (query.text) {
+    } else if (text) {
       return {
         multi_match: {
-          query: query.text,
+          query: text,
           fields: ['worldName', 'authorName'],
         },
       }
