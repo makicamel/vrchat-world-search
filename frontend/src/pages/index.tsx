@@ -17,7 +17,14 @@ const Worlds: React.FC<{
   loadMoreWorlds: any,
   isReachingEnd: boolean,
 }>
-  = ({ worlds, error, setAuthorId, setSupportQuest, loadMoreWorlds, isReachingEnd }): JSX.Element => {
+  = ({
+    worlds,
+    error,
+    setAuthorId,
+    setSupportQuest,
+    loadMoreWorlds,
+    isReachingEnd
+  }): JSX.Element => {
     const loader = (<div key='loader'>Loading...</div>)
     if (!worlds) return loader
     if (error) return <div>An error has occurred.</div>
@@ -52,7 +59,14 @@ const Worlds: React.FC<{
   }
 
 const Home: NextPage = () => {
-  const { worlds, error, setAuthorId, setSupportQuest, loadMoreWorlds, isReachingEnd } = useWorldsWithAuthorId()
+  const {
+    worlds,
+    error,
+    setAuthorId,
+    setSupportQuest,
+    loadMoreWorlds,
+    isReachingEnd
+  } = useWorldsWithAuthorId()
 
   return (
     <div>

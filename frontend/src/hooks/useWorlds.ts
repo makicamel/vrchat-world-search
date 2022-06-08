@@ -37,7 +37,14 @@ const useWorldsWithAuthorId = () => {
     if (!isLoadingMore && !isReachingEnd) setSize(size + 1)
   }
 
-  return { worlds, error, setAuthorId, setSupportQuest, loadMoreWorlds, isReachingEnd }
+  return {
+    worlds,
+    error,
+    setAuthorId,
+    setSupportQuest,
+    loadMoreWorlds,
+    isReachingEnd,
+  }
 }
 
 export default useWorldsWithAuthorId;
