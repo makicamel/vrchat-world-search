@@ -15,6 +15,9 @@ const theme = createTheme({
       primary: '#fff',
       secondary: '#0e9bb1'
     },
+    secondary: {
+      main: '#00de56',
+    },
   },
   typography: {
     fontFamily: 'Dosis,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif'

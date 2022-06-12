@@ -1,4 +1,7 @@
 import { Dispatch, SetStateAction } from 'react'
+import FormGroup from '@mui/material/FormGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Switch from '@mui/material/Switch'
 import styled from 'styled-components'
 
 const HeaderElement = styled.header`
@@ -24,6 +27,16 @@ const Header: React.FC<{
       <TitleElement onClick={() => setAuthorId(undefined)}>
         VRChat World Search
       </TitleElement>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Switch
+              color="secondary"
+            />
+          }
+          label="Quest supported only"
+        />
+      </FormGroup>
     </HeaderElement>
   )
 
