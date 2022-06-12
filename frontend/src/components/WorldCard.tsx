@@ -3,7 +3,6 @@ import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
-import Chip from '@mui/material/Chip'
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
@@ -11,6 +10,7 @@ import { CardActionArea } from '@mui/material'
 import { WorldInterface as World } from '../../types/world.interface'
 import styled from 'styled-components'
 import styles from '../styles/Home.module.css'
+import Tag from './Tag'
 
 const SupportQuestChipStyle = styled.span`
   cursor: pointer;
@@ -56,9 +56,9 @@ const WorldCard = (props: { world: World, author: JSX.Element, setSupportQuest: 
           </Typography>)
           : ''}
         <div>
-          {props.world.tags.map((tag: string, index: number) => (
-            <Chip key={`${index}${props.world.id}`} label={tag} size="small" clickable={true} color="info" className={styles.chip} />
-          ))}
+          {props.world.tags.map((tag: string, index: number) =>
+            <Tag key={`${index}${props.world.id}`} label={tag} />
+          )}
         </div>
         <Button
           variant="contained"
