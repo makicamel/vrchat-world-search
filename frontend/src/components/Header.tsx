@@ -20,9 +20,11 @@ const TitleElement = styled.span`
 `
 
 const Header: React.FC<{
-  setAuthorId: Dispatch<SetStateAction<string | undefined>>
+  setAuthorId: Dispatch<SetStateAction<string | undefined>>,
+  supportQuest: boolean,
+  setSupportQuest: Dispatch<SetStateAction<boolean>>,
 }>
-  = ({ setAuthorId }): JSX.Element => (
+  = ({ setAuthorId, supportQuest, setSupportQuest }): JSX.Element => (
     <HeaderElement>
       <TitleElement onClick={() => setAuthorId(undefined)}>
         VRChat World Search
@@ -32,6 +34,8 @@ const Header: React.FC<{
           control={
             <Switch
               color="secondary"
+              checked={supportQuest}
+              onChange={() => setSupportQuest(!supportQuest)}
             />
           }
           label="Quest supported only"

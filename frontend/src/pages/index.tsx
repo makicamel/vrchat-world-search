@@ -63,6 +63,7 @@ const Home: NextPage = () => {
     worlds,
     error,
     setAuthorId,
+    supportQuest,
     setSupportQuest,
     loadMoreWorlds,
     isReachingEnd
@@ -70,7 +71,11 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <Header setAuthorId={setAuthorId} />
+      <Header
+        setAuthorId={setAuthorId}
+        supportQuest={supportQuest}
+        setSupportQuest={setSupportQuest}
+      />
       <main className={styles.main}>
         <Worlds worlds={worlds} error={error} setAuthorId={setAuthorId} setSupportQuest={setSupportQuest} loadMoreWorlds={loadMoreWorlds} isReachingEnd={isReachingEnd} />
       </main>

@@ -41,6 +41,7 @@ const useWorldsWithAuthorId = () => {
     worlds,
     error,
     setAuthorId,
+    supportQuest,
     setSupportQuest,
     loadMoreWorlds,
     isReachingEnd,
