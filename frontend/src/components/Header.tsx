@@ -1,8 +1,9 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useContext } from 'react'
 import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Switch from '@mui/material/Switch'
 import styled from 'styled-components'
+import { QueriesContext } from '../hooks/useQueries'
 
 const HeaderElement = styled.header`
   background-color: #07242b;
@@ -24,24 +25,29 @@ const Header: React.FC<{
   supportQuest: boolean,
   setSupportQuest: Dispatch<SetStateAction<boolean>>,
 }>
-  = ({ setAuthorId, supportQuest, setSupportQuest }): JSX.Element => (
-    <HeaderElement>
-      <TitleElement onClick={() => setAuthorId(undefined)}>
-        VRChat World Search
-      </TitleElement>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              color="secondary"
-              checked={supportQuest}
-              onChange={() => setSupportQuest(!supportQuest)}
-            />
-          }
-          label="Quest supported only"
-        />
-      </FormGroup>
-    </HeaderElement>
-  )
+  = ({ setAuthorId, supportQuest, setSupportQuest }): JSX.Element => {
+    const { queries, setQueries } = useContext(QueriesContext)
+
+    return (
+      <HeaderElement>
+        <TitleElement onClick={() => setQueries({ authorId: undefined })}>
+          {queries.supportQuest}
+          VRChat World Search
+        </TitleElement>
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                color="secondary"
+                checked={queries.supportQuest}
+                onChange={() => setQueries({ supportQuest: !queries.supportQuest })}
+              />
+            }
+            label="Quest supported only"
+          />
+        </FormGroup>
+      </HeaderElement>
+    )
+  }
 
 export default Header

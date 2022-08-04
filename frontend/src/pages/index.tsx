@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import type { NextPage } from 'next'
 import Grid from '@mui/material/Grid'
 import { Dispatch, SetStateAction } from 'react';
@@ -6,6 +7,7 @@ import styles from '../styles/Home.module.css'
 import Header from '../components/Header'
 import WorldCard from '../components/WorldCard'
 import AuthorLink from '../components/AuthorLink'
+import { Queries, QueriesContext } from '../hooks/useQueries'
 import useWorldsWithAuthorId from '../hooks/useWorlds'
 import { WorldInterface as World } from '../../types/world.interface'
 
@@ -59,6 +61,7 @@ const Worlds: React.FC<{
   }
 
 const Home: NextPage = () => {
+  const [queries, setQueries] = useState({} as Queries)
   const {
     worlds,
     error,
@@ -70,16 +73,18 @@ const Home: NextPage = () => {
   } = useWorldsWithAuthorId()
 
   return (
-    <div>
-      <Header
-        setAuthorId={setAuthorId}
-        supportQuest={supportQuest}
-        setSupportQuest={setSupportQuest}
-      />
-      <main className={styles.main}>
-        <Worlds worlds={worlds} error={error} setAuthorId={setAuthorId} setSupportQuest={setSupportQuest} loadMoreWorlds={loadMoreWorlds} isReachingEnd={isReachingEnd} />
-      </main>
-    </div >
+    <QueriesContext.Provider value={{ queries, setQueries }}>
+      <div>
+        <Header
+          setAuthorId={setAuthorId}
+          supportQuest={supportQuest}
+          setSupportQuest={setSupportQuest}
+        />
+        <main className={styles.main}>
+          <Worlds worlds={worlds} error={error} setAuthorId={setAuthorId} setSupportQuest={setSupportQuest} loadMoreWorlds={loadMoreWorlds} isReachingEnd={isReachingEnd} />
+        </main>
+      </div >
+    </QueriesContext.Provider>
   )
 }
 
