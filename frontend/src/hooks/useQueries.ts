@@ -10,4 +10,10 @@ type QueriesAndSetQueries = {
   setQueries: React.Dispatch<React.SetStateAction<Queries>>
 }
 
-export const QueriesContext = createContext({} as QueriesAndSetQueries)
+export const QueriesContext = createContext(
+  {
+    queries: {
+      supportQuest: false
+    }
+  } as QueriesAndSetQueries
+)

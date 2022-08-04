@@ -1,29 +1,24 @@
 import React, { useState } from 'react'
 import type { NextPage } from 'next'
 import Grid from '@mui/material/Grid'
-import { Dispatch, SetStateAction } from 'react';
 import InfiniteScroll from 'react-infinite-scroller'
 import styles from '../styles/Home.module.css'
 import Header from '../components/Header'
 import WorldCard from '../components/WorldCard'
 import AuthorLink from '../components/AuthorLink'
-import { Queries, QueriesContext } from '../hooks/useQueries'
+import { QueriesContext } from '../hooks/useQueries'
 import useWorldsWithAuthorId from '../hooks/useWorlds'
 import { WorldInterface as World } from '../../types/world.interface'
 
 const Worlds: React.FC<{
   worlds: World[] | undefined,
   error: any,
-  setAuthorId: Dispatch<SetStateAction<string | undefined>>,
-  setSupportQuest: Dispatch<SetStateAction<boolean>>,
   loadMoreWorlds: any,
   isReachingEnd: boolean,
 }>
   = ({
     worlds,
     error,
-    setAuthorId,
-    setSupportQuest,
     loadMoreWorlds,
     isReachingEnd
   }): JSX.Element => {
@@ -35,12 +30,11 @@ const Worlds: React.FC<{
       (worlds || []).map((world: World, index: number) => {
         const author = (<AuthorLink
           author={{ authorName: world.authorName, authorId: world.authorId }}
-          setAuthorId={setAuthorId}
         />)
 
         return (
           <Grid item key={`${index}${world.id}`} md={6} lg={4} >
-            <WorldCard world={world} author={author} setSupportQuest={setSupportQuest} />
+            <WorldCard world={world} author={author} />
           </Grid>
         )
       })
@@ -61,27 +55,21 @@ const Worlds: React.FC<{
   }
 
 const Home: NextPage = () => {
-  const [queries, setQueries] = useState({} as Queries)
   const {
     worlds,
     error,
-    setAuthorId,
-    supportQuest,
-    setSupportQuest,
     loadMoreWorlds,
-    isReachingEnd
+    isReachingEnd,
+    queries,
+    setQueries
   } = useWorldsWithAuthorId()
 
   return (
     <QueriesContext.Provider value={{ queries, setQueries }}>
       <div>
-        <Header
-          setAuthorId={setAuthorId}
-          supportQuest={supportQuest}
-          setSupportQuest={setSupportQuest}
-        />
+        <Header />
         <main className={styles.main}>
-          <Worlds worlds={worlds} error={error} setAuthorId={setAuthorId} setSupportQuest={setSupportQuest} loadMoreWorlds={loadMoreWorlds} isReachingEnd={isReachingEnd} />
+          <Worlds worlds={worlds} error={error} loadMoreWorlds={loadMoreWorlds} isReachingEnd={isReachingEnd} />
         </main>
       </div >
     </QueriesContext.Provider>

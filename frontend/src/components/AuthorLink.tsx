@@ -16,11 +16,11 @@ const AuthorChip = styled.span`
   }
 `
 
-const AuthorLink = (props: { author: Author, setAuthorId: Dispatch<SetStateAction<string | undefined>> }) => (
+const AuthorLink = (props: { author: Author }) => (
   <Typography variant="body2" display="inline-block">
     by <AuthorChip
       className="author"
-      onClick={() => props.setAuthorId(props.author.authorId)}
+    // onClick={() => props.setAuthorId(props.author.authorId)}
     >
       {props.author.authorName}
     </AuthorChip>

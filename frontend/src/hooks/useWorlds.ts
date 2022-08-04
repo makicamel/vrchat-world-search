@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import axios, { AxiosError } from 'axios'
 import useSWRInfinite from 'swr/infinite'
 import { WorldInterface as World } from '../../types/world.interface'
+import { QueriesContext } from './useQueries'
 
 const PAGE_SIZE = 10
 
@@ -15,17 +16,12 @@ const fetcher = (url: string) => {
 }
 
 const useWorldsWithAuthorId = () => {
-  const [supportQuest, setSupportQuest] = useState(false)
-  const [authorId, setAuthorId] = useState<string | undefined>(undefined);
-  const query = [
-    (authorId) ? `&authorId=${authorId}` : null,
-    (supportQuest) ? `&supportQuest=${supportQuest}` : null
-  ]
-    .filter(q => q)
-    .join()
+  const defaultQueries = useContext(QueriesContext)
+  const [queries, setQueries] = useState(defaultQueries.queries)
+  const query = Object.entries(queries).map((entry) => `${entry[0]}=${entry[1]}`).join('&')
 
   const { data, error, size, setSize } = useSWRInfinite(
-    (index: number) => `/worlds?page=${index}${query}`,
+    (index: number) => `/worlds?page=${index}&${query}`,
     (url: string) => fetcher(url)
   )
   const worlds: World[] | undefined = data ? data.flat() : undefined
@@ -40,11 +36,10 @@ const useWorldsWithAuthorId = () => {
   return {
     worlds,
     error,
-    setAuthorId,
-    supportQuest,
-    setSupportQuest,
     loadMoreWorlds,
     isReachingEnd,
+    queries,
+    setQueries
   }
 }
 

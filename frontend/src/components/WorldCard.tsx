@@ -20,15 +20,15 @@ const SupportQuestChipStyle = styled.span`
   }
 `
 
-const SupportQuestChip = (props: { setSupportQuest: Dispatch<SetStateAction<boolean>> }) => (
+const SupportQuestChip = () => (
   <SupportQuestChipStyle
-    onClick={() => props.setSupportQuest(true)}
+  // onClick={() => props.setSupportQuest(true)}
   >
     Quest Supported
   </SupportQuestChipStyle>
 )
 
-const WorldCard = (props: { world: World, author: JSX.Element, setSupportQuest: Dispatch<SetStateAction<boolean>> }) => (
+const WorldCard = (props: { world: World, author: JSX.Element }) => (
   <Card variant="outlined" sx={{ maxWidth: 400, mx: 'auto' }}>
     <CardActionArea className={styles.card}>
       <CardMedia
@@ -52,7 +52,7 @@ const WorldCard = (props: { world: World, author: JSX.Element, setSupportQuest: 
         </Typography>
         {props.world.supportQuest ?
           (<Typography variant="body2">
-            <SupportQuestChip setSupportQuest={props.setSupportQuest} />
+            <SupportQuestChip />
           </Typography>)
           : ''}
         <div>
