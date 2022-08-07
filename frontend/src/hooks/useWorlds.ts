@@ -15,7 +15,7 @@ const fetcher = (url: string) => {
   return apiClient.get(url).then((response) => response.data)
 }
 
-const useWorldsWithAuthorId = () => {
+const useWorlds = () => {
   const defaultQueries = useContext(QueriesContext)
   const [queries, setQueries] = useState(defaultQueries.queries)
   const query = Object.entries(queries).map((entry) => `${entry[0]}=${entry[1]}`).join('&')
@@ -43,4 +43,4 @@ const useWorldsWithAuthorId = () => {
   }
 }
 
-export default useWorldsWithAuthorId;
+export default useWorlds

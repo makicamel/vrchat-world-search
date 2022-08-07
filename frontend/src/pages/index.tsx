@@ -7,7 +7,7 @@ import Header from '../components/Header'
 import WorldCard from '../components/WorldCard'
 import AuthorLink from '../components/AuthorLink'
 import { QueriesContext } from '../hooks/useQueries'
-import useWorldsWithAuthorId from '../hooks/useWorlds'
+import useWorlds from '../hooks/useWorlds'
 import { WorldInterface as World } from '../../types/world.interface'
 
 const Worlds: React.FC<{
@@ -62,7 +62,7 @@ const Home: NextPage = () => {
     isReachingEnd,
     queries,
     setQueries
-  } = useWorldsWithAuthorId()
+  } = useWorlds()
 
   return (
     <QueriesContext.Provider value={{ queries, setQueries }}>
