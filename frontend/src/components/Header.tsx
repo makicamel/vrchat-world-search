@@ -25,7 +25,7 @@ const Header: React.FC = (): JSX.Element => {
 
   return (
     <HeaderElement>
-      <TitleElement onClick={() => setQueries({ authorId: undefined })}>
+      <TitleElement onClick={() => setQueries({ ...queries, authorId: undefined })}>
         VRChat World Search
       </TitleElement>
       <FormGroup>
@@ -34,7 +34,7 @@ const Header: React.FC = (): JSX.Element => {
             <Switch
               color="secondary"
               checked={queries.supportQuest}
-              onChange={() => setQueries({ supportQuest: !queries.supportQuest })}
+              onChange={() => setQueries({ ...queries, supportQuest: !queries.supportQuest })}
             />
           }
           label="Quest supported only"

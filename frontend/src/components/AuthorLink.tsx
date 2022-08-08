@@ -1,7 +1,8 @@
 import Typography from '@mui/material/Typography'
-import { Dispatch, SetStateAction } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components'
 import theme from '../theme';
+import { QueriesContext } from '../hooks/useQueries'
 
 type Author = {
   authorId: string,
@@ -16,15 +17,19 @@ const AuthorChip = styled.span`
   }
 `
 
-const AuthorLink = (props: { author: Author }) => (
-  <Typography variant="body2" display="inline-block">
-    by <AuthorChip
-      className="author"
-    // onClick={() => props.setAuthorId(props.author.authorId)}
-    >
-      {props.author.authorName}
-    </AuthorChip>
-  </Typography>
-)
+const AuthorLink = (props: { author: Author }) => {
+  const { queries, setQueries } = useContext(QueriesContext)
+
+  return (
+    <Typography variant="body2" display="inline-block">
+      by <AuthorChip
+        className="author"
+        onClick={() => setQueries({ ...queries, authorId: props.author.authorId })}
+      >
+        {props.author.authorName}
+      </AuthorChip>
+    </Typography >
+  )
+}
 
 export default AuthorLink

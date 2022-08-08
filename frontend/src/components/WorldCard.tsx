@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { useContext } from 'react';
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { CardActionArea } from '@mui/material'
 import { WorldInterface as World } from '../../types/world.interface'
+import { QueriesContext } from '../hooks/useQueries';
 import styled from 'styled-components'
 import styles from '../styles/Home.module.css'
 import Tag from './Tag'
@@ -20,13 +21,17 @@ const SupportQuestChipStyle = styled.span`
   }
 `
 
-const SupportQuestChip = () => (
-  <SupportQuestChipStyle
-  // onClick={() => props.setSupportQuest(true)}
-  >
-    Quest Supported
-  </SupportQuestChipStyle>
-)
+const SupportQuestChip = () => {
+  const { queries, setQueries } = useContext(QueriesContext)
+
+  return (
+    <SupportQuestChipStyle
+      onClick={() => setQueries({ ...queries, supportQuest: true })}
+    >
+      Quest Supported
+    </SupportQuestChipStyle >
+  )
+}
 
 const WorldCard = (props: { world: World, author: JSX.Element }) => (
   <Card variant="outlined" sx={{ maxWidth: 400, mx: 'auto' }}>
