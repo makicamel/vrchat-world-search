@@ -18,7 +18,10 @@ const fetcher = (url: string) => {
 const useWorlds = () => {
   const defaultQueries = useContext(QueriesContext)
   const [queries, setQueries] = useState(defaultQueries.queries)
-  const query = Object.entries(queries).map((entry) => `${entry[0]}=${entry[1]}`).join('&')
+  const query = Object.entries(queries)
+    .filter((entry) => entry[1])
+    .map((entry) => `${entry[0]}=${entry[1]}`)
+    .join('&')
 
   const { data, error, size, setSize } = useSWRInfinite(
     (index: number) => `/worlds?page=${index}&${query}`,
