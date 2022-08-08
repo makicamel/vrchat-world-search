@@ -20,7 +20,13 @@ const useWorlds = () => {
   const [queries, setQueries] = useState(defaultQueries.queries)
   const query = Object.entries(queries)
     .filter((entry) => entry[1])
-    .map((entry) => `${entry[0]}=${entry[1]}`)
+    .map((entry) => {
+      if (Array.isArray(entry[1])) {
+        return entry[1].map((value) => `${entry[0]}=${value}`).join('&')
+      } else {
+        return `${entry[0]}=${entry[1]}`
+      }
+    })
     .join('&')
 
   const { data, error, size, setSize } = useSWRInfinite(

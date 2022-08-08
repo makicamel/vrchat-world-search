@@ -9,11 +9,13 @@ export class WorldsController {
   @Get()
   async getWorlds(
     @Query('authorId') authorId: string,
+    @Query('tags') tags: string[],
     @Query('supportQuest') supportQuest: string,
     @Query('page') page: string,
   ): Promise<Array<World>> {
     return this.worldService.search({
       authorId,
+      tags,
       supportQuest: supportQuest === 'true',
       page: Number(page),
     });

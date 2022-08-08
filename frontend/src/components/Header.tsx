@@ -25,7 +25,7 @@ const Header: React.FC = (): JSX.Element => {
 
   return (
     <HeaderElement>
-      <TitleElement onClick={() => setQueries({ ...queries, authorId: undefined })}>
+      <TitleElement onClick={() => setQueries({ ...queries, authorId: undefined, tags: undefined })}>
         VRChat World Search
       </TitleElement>
       <FormGroup>

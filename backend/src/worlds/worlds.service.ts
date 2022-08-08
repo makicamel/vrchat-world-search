@@ -7,16 +7,17 @@ export class WorldsService {
   index = 'worlds';
   constructor(private readonly elasticsearchService: ElasticsearchService) { }
 
-  async search({ page, authorId, supportQuest }: {
+  async search({ page, authorId, tags, supportQuest }: {
     page: number,
     authorId?: string,
+    tags?: string[],
     supportQuest?: boolean,
   }): Promise<Array<World>> {
     const response = await this.elasticsearchService.search<World>({
       index: this.index,
       body: {
         query: this.#query({
-          authorId, supportQuest
+          authorId, tags, supportQuest
         })
       },
       sort: 'updatedAt:desc',
@@ -26,8 +27,11 @@ export class WorldsService {
     return hits.map((world) => world._source);
   }
 
-  #query({ text, authorId, supportQuest }: {
-    text?: string, authorId?: string, supportQuest?: boolean
+  #query({ text, authorId, tags, supportQuest }: {
+    text?: string,
+    authorId?: string,
+    tags?: string[],
+    supportQuest?: boolean
   }) {
     let query = []
     if (text) {

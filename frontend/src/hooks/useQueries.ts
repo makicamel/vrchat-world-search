@@ -3,6 +3,7 @@ import { createContext } from 'react'
 export type Queries = {
   authorId?: string,
   supportQuest?: boolean,
+  tags?: string[],
 }
 
 type QueriesAndSetQueries = {
