@@ -44,6 +44,7 @@ export class WorldsService {
     }
     if (supportQuest) { query.push({ term: { supportQuest } }) }
     if (authorId) { query.push({ term: { authorId } }) }
+    if (tags) { tags.forEach((tag) => query.push({ term: { tags: tag } })) }
 
     if (query.length === 0) {
       return { match_all: {} }
