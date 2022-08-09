@@ -22,7 +22,7 @@ const useWorlds = () => {
     .filter((entry) => entry[1])
     .map((entry) => {
       if (Array.isArray(entry[1])) {
-        return entry[1].map((value) => `${entry[0]}=${value}`).join('&')
+        return entry[1].map((value) => `${entry[0]}[]=${value}`).join('&')
       } else {
         return `${entry[0]}=${entry[1]}`
       }
