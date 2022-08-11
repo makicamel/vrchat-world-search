@@ -4,6 +4,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Chip from '@mui/material/Chip'
 import Switch from '@mui/material/Switch'
 import HighlightOff from '@mui/icons-material/HighlightOff';
+import LocalOffer from '@mui/icons-material/LocalOffer';
 import styled from 'styled-components'
 import { QueriesContext } from '../hooks/useQueries'
 
@@ -67,8 +68,9 @@ const Header: React.FC = (): JSX.Element => {
             size="small"
             color="info"
             clickable={true}
-            icon={<HighlightOff />}
+            deleteIcon={<HighlightOff />}
             onClick={clearAuthor}
+            onDelete={clearAuthor}
           />) : null
         }
         {queries.tags?.map((tag) => (
@@ -78,8 +80,10 @@ const Header: React.FC = (): JSX.Element => {
             size="small"
             color="info"
             clickable={true}
-            icon={<HighlightOff />}
+            icon={<LocalOffer />}
+            deleteIcon={<HighlightOff />}
             onClick={clearTag(tag)}
+            onDelete={clearTag(tag)}
           />
         ))}
       </TagsElement>
