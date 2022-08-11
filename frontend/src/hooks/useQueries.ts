@@ -2,6 +2,7 @@ import { createContext } from 'react'
 
 export type Queries = {
   authorId?: string,
+  authorName?: string,
   supportQuest?: boolean,
   tags?: string[],
 }

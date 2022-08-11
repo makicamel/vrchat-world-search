@@ -19,12 +19,15 @@ const AuthorChip = styled.span`
 
 const AuthorLink = (props: { author: Author }) => {
   const { queries, setQueries } = useContext(QueriesContext)
+  const setAuthor = () => {
+    setQueries({ ...queries, authorId: props.author.authorId, authorName: props.author.authorName })
+  }
 
   return (
     <Typography variant="body2" display="inline-block">
       by <AuthorChip
         className="author"
-        onClick={() => setQueries({ ...queries, authorId: props.author.authorId })}
+        onClick={setAuthor}
       >
         {props.author.authorName}
       </AuthorChip>

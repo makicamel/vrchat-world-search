@@ -23,10 +23,11 @@ const useWorlds = () => {
     .map((entry) => {
       if (Array.isArray(entry[1])) {
         return entry[1].map((value) => `${entry[0]}[]=${value}`).join('&')
-      } else {
+      } else if (entry[0] !== 'authorName') { // Don't pass authorName as query
         return `${entry[0]}=${entry[1]}`
       }
     })
+    .filter((q) => q)
     .join('&')
 
   const { data, error, size, setSize } = useSWRInfinite(

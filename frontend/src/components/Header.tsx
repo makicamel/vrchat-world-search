@@ -30,14 +30,20 @@ const TitleElement = styled.span`
 
 const Header: React.FC = (): JSX.Element => {
   const { queries, setQueries } = useContext(QueriesContext)
-  const handleDelete = (tag: string) => () => {
+  const clearAuthor = () => {
+    setQueries({ ...queries, authorId: undefined, authorName: undefined })
+  }
+  const clearTag = (tag: string) => () => {
     setQueries({ ...queries, tags: queries.tags?.filter((value) => value !== tag) })
+  }
+  const clearQueries = () => {
+    setQueries({ ...queries, authorId: undefined, authorName: undefined, tags: undefined })
   }
 
   return (
     <header>
       <HeaderElement>
-        <TitleElement onClick={() => setQueries({ ...queries, authorId: undefined, tags: undefined })}>
+        <TitleElement onClick={clearQueries}>
           VRChat World Search
         </TitleElement>
         <FormGroup>
@@ -54,6 +60,17 @@ const Header: React.FC = (): JSX.Element => {
         </FormGroup>
       </HeaderElement>
       <TagsElement>
+        {(queries.authorId) ?
+          (<Chip
+            key="author"
+            label={`author: ${queries.authorName}`}
+            size="small"
+            color="info"
+            clickable={true}
+            icon={<HighlightOff />}
+            onClick={clearAuthor}
+          />) : null
+        }
         {queries.tags?.map((tag) => (
           <Chip
             key={tag}
@@ -62,7 +79,7 @@ const Header: React.FC = (): JSX.Element => {
             color="info"
             clickable={true}
             icon={<HighlightOff />}
-            onClick={handleDelete(tag)}
+            onClick={clearTag(tag)}
           />
         ))}
       </TagsElement>
