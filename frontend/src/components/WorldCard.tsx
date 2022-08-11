@@ -1,12 +1,14 @@
 import { useContext } from 'react';
-import Button from '@mui/material/Button'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardMedia from '@mui/material/CardMedia'
+import {
+  Button,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography
+} from '@mui/material'
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
-import { CardActionArea } from '@mui/material'
 import { WorldInterface as World } from '../../types/world.interface'
 import { QueriesContext } from '../hooks/useQueries';
 import styled from 'styled-components'

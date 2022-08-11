@@ -1,13 +1,16 @@
 import { useState, useContext } from 'react'
-import FormGroup from '@mui/material/FormGroup'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Chip from '@mui/material/Chip'
-import Grid from '@mui/material/Grid'
-import Switch from '@mui/material/Switch'
-import { FormControl, OutlinedInput, InputAdornment, IconButton } from '@mui/material'
-import HighlightOff from '@mui/icons-material/HighlightOff';
-import Search from '@mui/icons-material/Search';
-import LocalOffer from '@mui/icons-material/LocalOffer';
+import {
+  Chip,
+  Grid,
+  FormGroup,
+  FormControl,
+  FormControlLabel,
+  IconButton,
+  InputAdornment,
+  OutlinedInput,
+  Switch,
+} from '@mui/material'
+import { HighlightOff, LocalOffer, Search } from '@mui/icons-material'
 import styled from 'styled-components'
 import { QueriesContext } from '../hooks/useQueries'
 
