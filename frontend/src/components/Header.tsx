@@ -45,13 +45,14 @@ const Header: React.FC = (): JSX.Element => {
     setQueries({ ...queries, tags: queries.tags?.filter((value) => value !== tag) })
   }
   const clearQueries = () => {
-    setQueries({ ...queries, authorId: undefined, authorName: undefined, tags: undefined, text: undefined })
+    setQueries({ ...queries, authorId: undefined, authorName: undefined, tags: undefined, texts: undefined })
   }
   const updateText = () => (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value)
   }
   const searchWithText = () => {
-    setQueries({ ...queries, text: text })
+    const texts = queries.texts ? Array.from(new Set(queries.texts.concat([text]))) : [text]
+    setQueries({ ...queries, texts })
     setText('')
   }
   const searchWithTextWhenEnterKeyIsPressed = (event: React.KeyboardEvent<HTMLInputElement>) => {

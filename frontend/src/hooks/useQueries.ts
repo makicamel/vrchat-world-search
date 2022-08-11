@@ -5,7 +5,7 @@ export type Queries = {
   authorName?: string,
   supportQuest?: boolean,
   tags?: string[],
-  text?: string,
+  texts?: string[],
 }
 
 type QueriesAndSetQueries = {
