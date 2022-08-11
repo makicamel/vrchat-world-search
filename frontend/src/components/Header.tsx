@@ -1,9 +1,12 @@
-import { useContext } from 'react'
+import { useState, useContext } from 'react'
 import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Chip from '@mui/material/Chip'
+import Grid from '@mui/material/Grid'
 import Switch from '@mui/material/Switch'
+import { FormControl, OutlinedInput, InputAdornment, IconButton } from '@mui/material'
 import HighlightOff from '@mui/icons-material/HighlightOff';
+import Search from '@mui/icons-material/Search';
 import LocalOffer from '@mui/icons-material/LocalOffer';
 import styled from 'styled-components'
 import { QueriesContext } from '../hooks/useQueries'
@@ -31,6 +34,7 @@ const TitleElement = styled.span`
 
 const Header: React.FC = (): JSX.Element => {
   const { queries, setQueries } = useContext(QueriesContext)
+  const [text, setText] = useState('')
   const clearAuthor = () => {
     setQueries({ ...queries, authorId: undefined, authorName: undefined })
   }
@@ -38,7 +42,19 @@ const Header: React.FC = (): JSX.Element => {
     setQueries({ ...queries, tags: queries.tags?.filter((value) => value !== tag) })
   }
   const clearQueries = () => {
-    setQueries({ ...queries, authorId: undefined, authorName: undefined, tags: undefined })
+    setQueries({ ...queries, authorId: undefined, authorName: undefined, tags: undefined, text: undefined })
+  }
+  const updateText = () => (event: React.ChangeEvent<HTMLInputElement>) => {
+    setText(event.target.value)
+  }
+  const searchWithText = () => {
+    setQueries({ ...queries, text: text })
+    setText('')
+  }
+  const searchWithTextWhenEnterKeyIsPressed = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      searchWithText()
+    }
   }
 
   return (
@@ -47,18 +63,39 @@ const Header: React.FC = (): JSX.Element => {
         <TitleElement onClick={clearQueries}>
           VRChat World Search
         </TitleElement>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                color="secondary"
-                checked={queries.supportQuest}
-                onChange={() => setQueries({ ...queries, supportQuest: !queries.supportQuest })}
-              />
-            }
-            label="Quest supported only"
-          />
-        </FormGroup>
+        <Grid>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  color="secondary"
+                  checked={queries.supportQuest}
+                  onChange={() => setQueries({ ...queries, supportQuest: !queries.supportQuest })}
+                />
+              }
+              label="Quest supported only"
+            />
+          </FormGroup>
+          <FormControl variant="outlined">
+            <OutlinedInput
+              type="search"
+              size="small"
+              value={text}
+              onChange={updateText()}
+              onKeyDown={searchWithTextWhenEnterKeyIsPressed}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={searchWithText}
+                    onMouseDown={searchWithText}
+                  >
+                    {<Search />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+        </Grid>
       </HeaderElement>
       <TagsElement>
         {(queries.authorId) ?
