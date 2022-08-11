@@ -3,7 +3,6 @@ import {
   Chip,
   Grid,
   FormGroup,
-  FormControl,
   FormControlLabel,
   IconButton,
   InputAdornment,
@@ -20,7 +19,7 @@ const HeaderElement = styled.header`
   font-family: Dosis, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
   font-size: 3rem;
   margin: 0;
-  padding: 0 2rem;
+  padding: 0 2rem 0.5rem;
 `
 const TagsElement = styled.header`
   background-color: #07242b;
@@ -70,20 +69,22 @@ const Header: React.FC = (): JSX.Element => {
         <TitleElement onClick={clearQueries}>
           VRChat World Search
         </TitleElement>
-        <Grid>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch
-                  color="secondary"
-                  checked={queries.supportQuest}
-                  onChange={() => setQueries({ ...queries, supportQuest: !queries.supportQuest })}
-                />
-              }
-              label="Quest supported only"
-            />
-          </FormGroup>
-          <FormControl variant="outlined">
+        <Grid container>
+          <Grid item xs={12} md={6}>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    color="secondary"
+                    checked={queries.supportQuest}
+                    onChange={() => setQueries({ ...queries, supportQuest: !queries.supportQuest })}
+                  />
+                }
+                label="Quest supported only"
+              />
+            </FormGroup>
+          </Grid>
+          <Grid container md={6} direction="column" alignItems="end">
             <OutlinedInput
               type="search"
               size="small"
@@ -101,7 +102,7 @@ const Header: React.FC = (): JSX.Element => {
                 </InputAdornment>
               }
             />
-          </FormControl>
+          </Grid>
         </Grid>
       </HeaderElement>
       <TagsElement>
@@ -144,7 +145,7 @@ const Header: React.FC = (): JSX.Element => {
           />
         ))}
       </TagsElement>
-    </header>
+    </header >
   )
 }
 
