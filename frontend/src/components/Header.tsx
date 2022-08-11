@@ -44,6 +44,9 @@ const Header: React.FC = (): JSX.Element => {
   const clearTag = (tag: string) => () => {
     setQueries({ ...queries, tags: queries.tags?.filter((value) => value !== tag) })
   }
+  const clearText = (text: string) => () => {
+    setQueries({ ...queries, texts: queries.texts?.filter((value) => value !== text) })
+  }
   const clearQueries = () => {
     setQueries({ ...queries, authorId: undefined, authorName: undefined, tags: undefined, texts: undefined })
   }
@@ -125,6 +128,19 @@ const Header: React.FC = (): JSX.Element => {
             deleteIcon={<HighlightOff />}
             onClick={clearTag(tag)}
             onDelete={clearTag(tag)}
+          />
+        ))}
+        {queries.texts?.map((text) => (
+          <Chip
+            key={text}
+            label={text}
+            size="small"
+            color="info"
+            clickable={true}
+            icon={<Search />}
+            deleteIcon={<HighlightOff />}
+            onClick={clearText(text)}
+            onDelete={clearText(text)}
           />
         ))}
       </TagsElement>
