@@ -19,9 +19,12 @@ export class WorldsService {
       body: {
         query: this.#query({
           authorId, tags, texts, supportQuest
-        })
+        }),
+        sort: [
+          '_score',
+          { 'updatedAt': { 'order': 'desc' } }
+        ],
       },
-      sort: 'updatedAt:desc',
       from: page * 10,
     })
     const hits = response.hits.hits;
@@ -40,7 +43,7 @@ export class WorldsService {
         query.push({
           multi_match: {
             query: text,
-            fields: ['worldName', 'authorName'],
+            fields: ['worldName^2', 'authorName^2', 'tags^1.5', 'description'],
           }
         })
       })
