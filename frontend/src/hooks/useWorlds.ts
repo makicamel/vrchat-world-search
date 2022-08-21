@@ -8,7 +8,7 @@ const PAGE_SIZE = 10
 
 const fetcher = (url: string) => {
   const apiClient = axios.create({
-    baseURL: 'http://localhost:3001',
+    baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
     timeout: 5000,
     headers: { 'Content-Type': 'application/json' }
   });
