@@ -10,7 +10,10 @@ const fetcher = (url: string) => {
   const apiClient = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
     timeout: 5000,
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'https://vrchat-world-search.vercel.app/'
+    }
   });
   return apiClient.get(url).then((response) => response.data)
 }
