@@ -1,10 +1,10 @@
-import { WorldInterface } from './world.interface';
+import { WorldInterface } from './world.interface'
 
 export interface WorldsInterface {
   hits: {
-    total: number;
+    total: number
     hits: Array<{
-      _source: WorldInterface;
-    }>;
-  };
+      _source: WorldInterface
+    }>
+  }
 }

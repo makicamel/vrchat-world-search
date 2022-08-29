@@ -12,9 +12,9 @@ const fetcher = (url: string) => {
     timeout: 5000,
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'https://vrchat-world-search.vercel.app/'
-    }
-  });
+      'Access-Control-Allow-Origin': 'https://vrchat-world-search.vercel.app/',
+    },
+  })
   return apiClient.get(url).then((response) => response.data)
 }
 
@@ -26,7 +26,8 @@ const useWorlds = () => {
     .map((entry) => {
       if (Array.isArray(entry[1])) {
         return entry[1].map((value) => `${entry[0]}[]=${value}`).join('&')
-      } else if (entry[0] !== 'authorName') { // Don't pass authorName as query
+      } else if (entry[0] !== 'authorName') {
+        // Don't pass authorName as query
         return `${entry[0]}=${entry[1]}`
       }
     })
@@ -38,9 +39,11 @@ const useWorlds = () => {
     (url: string) => fetcher(url)
   )
   const worlds: World[] | undefined = data ? data.flat() : undefined
-  const isLoadingMore = (size > 0 && data && typeof data[size - 1] === 'undefined')
+  const isLoadingMore =
+    size > 0 && data && typeof data[size - 1] === 'undefined'
   const isEmpty = data?.[0]?.length === 0
-  const isReachingEnd = isEmpty || !!(data && data[data.length - 1]?.length < PAGE_SIZE)
+  const isReachingEnd =
+    isEmpty || !!(data && data[data.length - 1]?.length < PAGE_SIZE)
 
   const loadMoreWorlds = () => {
     if (!isLoadingMore && !isReachingEnd) setSize(size + 1)
@@ -52,7 +55,7 @@ const useWorlds = () => {
     loadMoreWorlds,
     isReachingEnd,
     queries,
-    setQueries
+    setQueries,
   }
 }
 

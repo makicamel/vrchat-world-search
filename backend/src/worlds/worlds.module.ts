@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { ElasticsearchModule } from '@nestjs/elasticsearch';
-import { WorldsController } from './worlds.controller';
-import { WorldsService } from './worlds.service';
+import { Module } from '@nestjs/common'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import { ElasticsearchModule } from '@nestjs/elasticsearch'
+import { WorldsController } from './worlds.controller'
+import { WorldsService } from './worlds.service'
 
 @Module({
   imports: [
@@ -22,4 +22,4 @@ import { WorldsService } from './worlds.service';
   controllers: [WorldsController],
   providers: [WorldsService],
 })
-export class WorldsModule { }
+export class WorldsModule {}

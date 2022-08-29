@@ -1,22 +1,20 @@
 import { createContext } from 'react'
 
 export type Queries = {
-  authorId?: string,
-  authorName?: string,
-  supportQuest?: boolean,
-  tags?: string[],
-  texts?: string[],
+  authorId?: string
+  authorName?: string
+  supportQuest?: boolean
+  tags?: string[]
+  texts?: string[]
 }
 
 type QueriesAndSetQueries = {
-  queries: Queries,
+  queries: Queries
   setQueries: React.Dispatch<React.SetStateAction<Queries>>
 }
 
-export const QueriesContext = createContext(
-  {
-    queries: {
-      supportQuest: false
-    }
-  } as QueriesAndSetQueries
-)
+export const QueriesContext = createContext({
+  queries: {
+    supportQuest: false,
+  },
+} as QueriesAndSetQueries)

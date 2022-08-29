@@ -16,7 +16,8 @@ import { QueriesContext } from '../hooks/useQueries'
 const HeaderElement = styled.header`
   background-color: #07242b;
   border-bottom: 2px solid #053c48;
-  font-family: Dosis, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
+  font-family: Dosis, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Arial, sans-serif;
   font-size: 3rem;
   margin: 0;
   padding: 0 2rem 0.5rem;
@@ -29,9 +30,9 @@ const TagsElement = styled.header`
 `
 
 const TitleElement = styled.span`
-&:hover {
-  cursor: pointer;
-}
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const Header: React.FC = (): JSX.Element => {
@@ -41,24 +42,40 @@ const Header: React.FC = (): JSX.Element => {
     setQueries({ ...queries, authorId: undefined, authorName: undefined })
   }
   const clearTag = (tag: string) => () => {
-    setQueries({ ...queries, tags: queries.tags?.filter((value) => value !== tag) })
+    setQueries({
+      ...queries,
+      tags: queries.tags?.filter((value) => value !== tag),
+    })
   }
   const clearText = (text: string) => () => {
-    setQueries({ ...queries, texts: queries.texts?.filter((value) => value !== text) })
+    setQueries({
+      ...queries,
+      texts: queries.texts?.filter((value) => value !== text),
+    })
   }
   const clearQueries = () => {
-    setQueries({ ...queries, authorId: undefined, authorName: undefined, tags: undefined, texts: undefined })
+    setQueries({
+      ...queries,
+      authorId: undefined,
+      authorName: undefined,
+      tags: undefined,
+      texts: undefined,
+    })
   }
   const updateText = () => (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value)
   }
   const searchWithText = () => {
-    const texts = queries.texts ? Array.from(new Set(queries.texts.concat([text]))) : [text]
+    const texts = queries.texts
+      ? Array.from(new Set(queries.texts.concat([text])))
+      : [text]
     setQueries({ ...queries, texts })
     setText('')
   }
-  const searchWithTextWhenEnterKeyIsPressed = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
+  const searchWithTextWhenEnterKeyIsPressed = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (event.key === 'Enter') {
       searchWithText()
     }
   }
@@ -66,9 +83,7 @@ const Header: React.FC = (): JSX.Element => {
   return (
     <header>
       <HeaderElement>
-        <TitleElement onClick={clearQueries}>
-          VRChat World Search
-        </TitleElement>
+        <TitleElement onClick={clearQueries}>VRChat World Search</TitleElement>
         <Grid container>
           <Grid item xs={12} md={6}>
             <FormGroup>
@@ -77,7 +92,12 @@ const Header: React.FC = (): JSX.Element => {
                   <Switch
                     color="secondary"
                     checked={queries.supportQuest}
-                    onChange={() => setQueries({ ...queries, supportQuest: !queries.supportQuest })}
+                    onChange={() =>
+                      setQueries({
+                        ...queries,
+                        supportQuest: !queries.supportQuest,
+                      })
+                    }
                   />
                 }
                 label="Quest supported only"
@@ -106,8 +126,8 @@ const Header: React.FC = (): JSX.Element => {
         </Grid>
       </HeaderElement>
       <TagsElement>
-        {(queries.authorId) ?
-          (<Chip
+        {queries.authorId ? (
+          <Chip
             key="author"
             label={`author: ${queries.authorName}`}
             size="small"
@@ -116,8 +136,8 @@ const Header: React.FC = (): JSX.Element => {
             deleteIcon={<HighlightOff />}
             onClick={clearAuthor}
             onDelete={clearAuthor}
-          />) : null
-        }
+          />
+        ) : null}
         {queries.tags?.map((tag) => (
           <Chip
             key={tag}
@@ -145,7 +165,7 @@ const Header: React.FC = (): JSX.Element => {
           />
         ))}
       </TagsElement>
-    </header >
+    </header>
   )
 }
 

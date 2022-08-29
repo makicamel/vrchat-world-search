@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext } from 'react'
 import {
   Button,
   Card,
@@ -6,11 +6,11 @@ import {
   CardContent,
   CardMedia,
   Grid,
-  Typography
+  Typography,
 } from '@mui/material'
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew'
 import { WorldInterface as World } from '../../types/world.interface'
-import { QueriesContext } from '../hooks/useQueries';
+import { QueriesContext } from '../hooks/useQueries'
 import styled from 'styled-components'
 import styles from '../styles/Home.module.css'
 import Tag from './Tag'
@@ -31,11 +31,11 @@ const SupportQuestChip = () => {
       onClick={() => setQueries({ ...queries, supportQuest: true })}
     >
       Quest Supported
-    </SupportQuestChipStyle >
+    </SupportQuestChipStyle>
   )
 }
 
-const WorldCard = (props: { world: World, author: JSX.Element }) => (
+const WorldCard = (props: { world: World; author: JSX.Element }) => (
   <Card variant="outlined" sx={{ maxWidth: 400, mx: 'auto' }}>
     <CardActionArea className={styles.card}>
       <CardMedia
@@ -50,22 +50,20 @@ const WorldCard = (props: { world: World, author: JSX.Element }) => (
               {props.world.worldName}
             </Typography>
           </Grid>
-          <Grid item>
-            {props.author}
-          </Grid>
+          <Grid item>{props.author}</Grid>
         </Grid>
-        <Typography variant="body2">
-          {props.world.description}
-        </Typography>
-        {props.world.supportQuest ?
-          (<Typography variant="body2">
+        <Typography variant="body2">{props.world.description}</Typography>
+        {props.world.supportQuest ? (
+          <Typography variant="body2">
             <SupportQuestChip />
-          </Typography>)
-          : ''}
+          </Typography>
+        ) : (
+          ''
+        )}
         <div>
-          {props.world.tags.map((tag: string, index: number) =>
+          {props.world.tags.map((tag: string, index: number) => (
             <Tag key={`${index}${props.world.id}`} label={tag} />
-          )}
+          ))}
         </div>
         <Button
           variant="contained"

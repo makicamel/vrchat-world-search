@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles'
 
 const theme = createTheme({
   palette: {
@@ -13,16 +13,16 @@ const theme = createTheme({
     },
     text: {
       primary: '#fff',
-      secondary: '#0e9bb1'
+      secondary: '#0e9bb1',
     },
     secondary: {
       main: '#00de56',
     },
   },
   typography: {
-    fontFamily: 'Dosis,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif'
-  }
+    fontFamily:
+      'Dosis,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif',
+  },
 })
 
-
-export default theme;
+export default theme
