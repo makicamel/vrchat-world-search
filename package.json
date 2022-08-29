@@ -8,6 +8,10 @@
   ],
   "scripts": {
     "build": "npm run build --workspaces",
-    "start": "npm run start --workspace=backend"
+    "start": "npm run start --workspace=backend",
+    "format": "prettier --workspaces --write \"**/src/**/*\" \"**/test/**/*\""
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1"
   }
 }
