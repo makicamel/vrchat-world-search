@@ -27,7 +27,7 @@ export class WorldsService {
       },
       from: page * 10,
     })
-    const hits = response.hits.hits;
+    const hits = response.body['hits'].hits
     return hits.map((world) => world._source);
   }
 
