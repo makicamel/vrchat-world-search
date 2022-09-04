@@ -12,7 +12,6 @@ const fetcher = (url: string) => {
     timeout: 5000,
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'https://vrchat-world-search.vercel.app/',
     },
   })
   return apiClient.get(url).then((response) => response.data)
